@@ -1,22 +1,16 @@
-class MyFavoriteNumber:
-    def __init__(self, number):
-        self.number = number
-
-    def set_number(self, target):
-        target.number = self.number
-
-    def output(self, multiplier):
-        print(self.number * multiplier)
+def print_number(self):
+    print(self.number)
 
 
 class CurrentNumber:
     def __init__(self):
         self.number = 2
 
-    def output(self):
-        print(self.number)
+    def output(self, number2):
+        print_number(self)
+        print(number2)
 
 
 x = CurrentNumber()
-method_name = "output"
-x.method_name()
+method_name = x.output()
+x.output()
