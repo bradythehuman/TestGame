@@ -1,7 +1,7 @@
 import effects_mod
 
 
-def get_target(range_):
+def get_target(range):
     return input('copy unit name and location the return')
 
 
@@ -15,8 +15,16 @@ def apply_effect(target, effect_str, multiplier=0):
 
 
 class Ability:
-    def __init__(self, cost=0):
-        self.cost = cost
+    default_cost = 0
+    default_type = 'basic'
 
-    def call_ability(self):
+    def __init__(self):
+        self.cost = self.default_cost
+        self.type = self.default_type
+
+    def call_ability(self, caster):
+        caster.mana -= self.cost
+        self.ability_effect(caster)
+
+    def ability_effect(self, caster):
         pass

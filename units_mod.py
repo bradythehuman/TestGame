@@ -1,12 +1,14 @@
-import abilities_mod
+order_of_effects = []
+
+
+class SkillTree:
+    def __init__(self):
 
 
 class Minion:
     default_vitality = 0
     default_defense = 0
-    default_abilities = {}
-    stunned = 0
-
+    default_abilities = []
 
     unit_type = 'basic'
     cost = 0
@@ -15,16 +17,15 @@ class Minion:
 
     def __init__(self, xy_pos, encounter):
         # Initialisation of normal variables
-        self.xyPos = xy_pos
+        self.xy_pos = xy_pos
         self.encounter = encounter
-        self.effects = []
+        self.effects = {}
         self.rounds_in_play = 0
 
         # Initialization of variables altered by effects
         self.vitality = self.default_vitality
         self.defense = self.default_defense
         self.abilities = self.default_abilities
-        self.blood_loss = 0
 
         self.update_effects()
 
@@ -33,13 +34,22 @@ class Minion:
         self.defense = self.default_defense
         self.abilities = self.default_abilities
 
-        for effect in self.effects:
-            try:
-                for key in self.effects[effect]:
-                    self.effects[effect][key].on_update(self.encounter, self)
-            except TypeError:
-                self.effects[effect].on_update(self.encounter, self)
+        trimmed_effects = {}
+        for key in self.effects:
+            if self.effects[key].get_primary():
+                trimmed_effects[key] = self.effects[key]
+        self.effects = trimmed_effects
 
-# class Hero:
-#     def __init__(self):
-#         pass
+        for effect in self.effects:
+            self.effects[effect].on_update(self.encounter, self)
+
+
+class Dan(Minion):
+    default_abilities = 7
+    default_defense = 2
+    default_abilities = []
+
+    unit_type = 'Dan'
+    cost = 4
+
+    def a_disaproving_look(self):

@@ -1,0 +1,4 @@
+This can possibly be done by binning effects into multiple stages. The plan is to use this system for now to avoid
+errors then reevaluate later once the effects system is more populated.
+
+There are currently no rules.
