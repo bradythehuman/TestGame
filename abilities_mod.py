@@ -28,3 +28,4 @@ class Ability:
 
     def ability_effect(self, caster):
         pass
+
